@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>午餐选择器</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f8ff;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-size: 3em;
+            animation: fadeIn 2s;
+        }
+
+        p {
+            font-size: 1.5em;
+            margin: 20px 0;
+            animation: slideIn 2s;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .custom-alert {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+
+        .alert-text {
+            font-size: 1.5em; /* 默认文字大小 */
+        }
+
+        .lunch-name {
+            font-size: 2em; /* 午餐名称更大的字体 */
+            font-weight: bold;
+            color: #4CAF50; /* 使午餐名称的颜色与按钮一致 */
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>午餐吃什么?</h1>
+        <p>点击下面的按钮，看看今天的午餐推荐!</p>
+        <button onclick="suggestLunch()">午餐吃什么</button>
+    </div>
+
+    <div class="overlay" id="overlay" onclick="closeAlert()"></div>
+    <div class="custom-alert" id="customAlert">
+        <p class="alert-text">今天推荐你吃: <span class="lunch-name" id="lunchName"></span></p>
+        <button onclick="closeAlert()">关闭</button>
+    </div>
+
+    <script>
+        const lunches = [
+            "拉面",
+            "猪脚饭",
+            "大家乐",
+            "披萨",
+            "汉堡",
+            "寿司",
+            "炒饭",
+            "炸鸡",
+            "沙拉",
+            "意大利面",
+            "牛肉面",
+            "越南河粉",
+            "豆腐脑",
+            "牛排",
+            "饺子",
+            "咖喱饭",
+            "煎饼果子",
+            "肠粉",
+            "花卷",
+            "羊肉串"
+        ];
+
+        function suggestLunch() {
+            const randomIndex = Math.floor(Math.random() * lunches.length);
+            document.getElementById("lunchName").textContent = lunches[randomIndex];
+            document.getElementById("customAlert").style.display = "block";
+            document.getElementById("overlay").style.display = "block";
+        }
+
+        function closeAlert() {
+            document.getElementById("customAlert").style.display = "none";
+            document.getElementById("overlay").style.display = "none";
+        }
+    </script>
+</body>
+</html>
+
